@@ -2,7 +2,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <iostream>
-#include <string.h>
+// #include <string.h>
 
 using namespace std;
 
@@ -47,7 +47,7 @@ int main() {
                 break;
             }
             line += "\n";
-            write(pipe1[1], line.c_str(), strlen(line.c_str()));
+            write(pipe1[1], line.c_str(), line.length());
         }
 
         close(pipe1[1]);
