@@ -42,9 +42,6 @@ int main() {
 
         string line;
         while(getline(cin, line)) {
-            if (line == "exit") {
-                break;
-            }
             line += "\n";
             write(pipe1[1], line.c_str(), line.length());
         }

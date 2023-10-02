@@ -20,15 +20,6 @@ int main(int argc, char *argv[]) {
     }
     string line;
 
-    // while (getline(cin, line)) {
-    //     float ans = 0.0, number = 0.0;
-    //     istringstream iss(line);
-    //     while (iss >> number) {
-    //         ans += number;
-    //     }
-    //     cout << ans << endl;
-    // }
-
     char c = ' ';
     float ans = 0.0, number = 0.0;
     while (scanf("%f%c", &number, &c) > 0) {

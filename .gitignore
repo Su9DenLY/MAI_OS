@@ -34,3 +34,6 @@
 # Directories
 build
 .vscode
+
+# Format file
+.clang-format
