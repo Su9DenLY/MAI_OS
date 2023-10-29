@@ -37,3 +37,6 @@ build
 
 # Format file
 .clang-format
+
+# Log file
+*.log
