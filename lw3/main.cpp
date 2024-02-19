@@ -50,8 +50,10 @@ int main() {
         data->data[15] = '\0';
         for (size_t i = 0; i < out.size(); ++i) {
             if (!(i % 15)) {
-                sem_post(&data->sem1);
-                sem_wait(&data->sem2);
+                err = sem_post(&data->sem1);
+                throw_if(err, "Semaphore post error");
+                err = sem_wait(&data->sem2);
+                throw_if(err, "Semaphore wait error");
             }
             data->data[i % 15] = out[i];
         }
@@ -59,12 +61,15 @@ int main() {
             data->data[out.size() % 15] = '\0';
         }
         data->end = true;
-        sem_post(&data->sem1);
+        err = sem_post(&data->sem1);
+        throw_if(err, "Semaphore post error");
 
         wait(nullptr);
     }
-    sem_destroy(&data->sem1);
-    sem_destroy(&data->sem2);
+    err = sem_destroy(&data->sem1);
+    throw_if(err, "Semaphore destroy error");
+    err = sem_destroy(&data->sem2);
+    throw_if(err, "Semaphore destroy error");
 
     munmap(data, sizeof(SharedData));
     shm_unlink(shm_name);

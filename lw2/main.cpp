@@ -16,6 +16,16 @@ struct Args {
     pthread_barrier_t *barrier;
 };
 
+void print(float *matrix, int rows, int columns) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            cout << matrix[i * columns + j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
 void *ge_parallel(void *args) {
     Args *local_args = (Args *)args;
 
@@ -38,6 +48,8 @@ void *ge_parallel(void *args) {
 
         pthread_barrier_wait(barrier);
 
+        // print(matrix, columns - 1, columns);
+
         for (int j = i + 1; j < columns; j++) {
             if ((j % num_threads) == tid) {
                 float scale = matrix[j * columns + i];
@@ -51,9 +63,9 @@ void *ge_parallel(void *args) {
         }
     }
 
-    if (tid == num_threads - 1) {
-        matrix[(columns - 1) * columns + columns - 1] = 1;
-    }
+    // if (tid == num_threads - 1) {
+    //     matrix[(columns - 1) * columns + columns - 1] = 1;
+    // }
 
     return 0;
 }
@@ -100,9 +112,9 @@ int main(int argc, char *argv[]) {
     }
 
     int output_file_d = open("../InOutFiles/output.txt", O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-    // int input_file_d = open("../InOutFiles/10.txt", O_RDONLY);
+    int input_file_d = open("../InOutFiles/10.txt", O_RDONLY);
     // int input_file_d = open("../InOutFiles/2500.txt", O_RDONLY);
-    int input_file_d = open("../InOutFiles/3000.txt", O_RDONLY);
+    // int input_file_d = open("../InOutFiles/3000.txt", O_RDONLY);
 
     if (input_file_d == -1 || output_file_d == -1) {
         cerr << "File error" << endl;
@@ -139,6 +151,8 @@ int main(int argc, char *argv[]) {
 
     chrono::duration<float> elapsed = chrono::duration_cast<chrono::duration<float>>(end - start);
     cout << "Time = " << elapsed.count() << " seconds" << endl;
+
+    print(matrix, columns - 1, columns);
 
     if (dup2(output_file_d, fileno(stdout)) == -1) {
         cerr << "Dup2 error" << endl;

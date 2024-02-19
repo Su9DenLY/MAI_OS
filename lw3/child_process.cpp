@@ -32,9 +32,11 @@ int main(int argc, char* argv[]) {
 
     string in;
     while (1) {
-        sem_wait(&data->sem1);
+        int err = sem_wait(&data->sem1);
+        throw_if(err, "Semaphore wait error");
         in += data->data;
-        sem_post(&data->sem2);
+        err = sem_post(&data->sem2);
+        throw_if(err, "Semaphore post error");
         if (data->end) {
             break;
         }
