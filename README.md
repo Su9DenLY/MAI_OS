@@ -6,4 +6,4 @@ This repository stores laboratory work on OS at the Moscow Aviation Institute
 | 2        | 10      |
 | 3        | 2       |
 | 4        | 30      |
-| 5-7      | 48      |
+| 5-7      | 32      |
