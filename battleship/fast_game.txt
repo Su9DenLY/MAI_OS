@@ -1,0 +1,33 @@
+Quick placement of ships
+A0 A3
+A5 A7
+C1 C3
+C5 C6
+F0 E0
+F4 G4
+J0
+J9
+E9
+A9
+
+Fast attack ships
+A0
+A1
+A2
+A3
+A5
+A6
+A7
+C1
+C2
+C3
+C5
+C6
+F0
+E0
+F4
+G4
+J0
+J9
+E9
+A9
