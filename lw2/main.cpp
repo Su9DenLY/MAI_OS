@@ -63,10 +63,6 @@ void *ge_parallel(void *args) {
         }
     }
 
-    // if (tid == num_threads - 1) {
-    //     matrix[(columns - 1) * columns + columns - 1] = 1;
-    // }
-
     return 0;
 }
 
@@ -152,7 +148,7 @@ int main(int argc, char *argv[]) {
     chrono::duration<float> elapsed = chrono::duration_cast<chrono::duration<float>>(end - start);
     cout << "Time = " << elapsed.count() << " seconds" << endl;
 
-    print(matrix, columns - 1, columns);
+    // print(matrix, columns - 1, columns);
 
     if (dup2(output_file_d, fileno(stdout)) == -1) {
         cerr << "Dup2 error" << endl;
